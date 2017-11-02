@@ -29,6 +29,14 @@
 	.then(html=>{
 		var header=document.getElementById("header");
 		header.innerHTML=html;
+		
+		document.querySelector("[data-trigger=search]")
+			.onclick=()=>{
+			var kw=document.getElementById("txtSearch")
+										.value.trim();
+			if(kw.length>0)
+				location="products.html?kw="+kw;
+		}
 
 		loadStatus();
 
