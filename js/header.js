@@ -29,17 +29,23 @@
 	.then(html=>{
 		var header=document.getElementById("header");
 		header.innerHTML=html;
-		
+
+		/*如果url中有kw参数，就读取kw参数到txtSearch文本框中*/
 		if(location.search)
-			document.getElementById("txtSearch").value=
-				decodeURI(location.search.split("=")[1]);
-
-
+			document.getElementById("txtSearch")
+			        .value=decodeURI(
+								location.search.split("=")[1]
+			        );
+		
+		/*为search按钮添加单击事件，跳转到商品列表页*/
+		//查找data-trigger属性为search的a绑定单击事件
 		document.querySelector("[data-trigger=search]")
 			.onclick=()=>{
+			//获得id为txtSearch的内容,去掉开头和结尾的空格保存在变量kw中
 			var kw=document.getElementById("txtSearch")
 										.value.trim();
-			if(kw.length>0)
+			if(kw!=="")//如果kw不为""
+				//用location跳转到products.html?kw=kw
 				location="products.html?kw="+kw;
 		}
 
