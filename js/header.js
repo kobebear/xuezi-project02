@@ -30,6 +30,11 @@
 		var header=document.getElementById("header");
 		header.innerHTML=html;
 		
+		if(location.search)
+			document.getElementById("txtSearch").value=
+				decodeURI(location.search.split("=")[1]);
+
+
 		document.querySelector("[data-trigger=search]")
 			.onclick=()=>{
 			var kw=document.getElementById("txtSearch")
