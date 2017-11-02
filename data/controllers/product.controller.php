@@ -48,4 +48,4 @@ function getProductsByKw(){
 	$result=mysqli_query($conn,$sql);
 	echo json_encode(mysqli_fetch_all($result,1));
 }
-getProductsByKw();
+//getProductsByKw();
