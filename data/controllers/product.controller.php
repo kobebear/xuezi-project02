@@ -25,3 +25,27 @@ function get_index_products(){
 	echo json_encode($output);
 }
 //get_index_products();
+function getProductsByKw(){
+	global $conn;
+	//?kw=mac 256g
+	@$kw=$_REQUEST["kw"];
+	$sql="select lid,price,title,(select md from xz_laptop_pic where laptop_id=lid limit 1) as md from xz_laptop ";
+	if($kw){
+		//$kw=mac 256g
+		//将$kw按空格切割为数组
+		$kws=explode(" ",$kw);//js:split
+		//$kws:[mac,256g]
+		for($i=0;$i<count($kws);$i++){
+			$kws[$i]=" title like '%".$kws[$i]."%' ";
+		}
+		//$kws:[
+			//" title like '%mac%' ",
+			//" title like '%256g%' "
+		//]
+		$sql.=" where ".implode(" and ",$kws);
+		               //js: $kws.join(" and ")
+	}
+	$result=mysqli_query($conn,$sql);
+	echo json_encode(mysqli_fetch_all($result,1));
+}
+//getProductsByKw();
